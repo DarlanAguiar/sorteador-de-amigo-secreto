@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
+import { act } from "react-dom/test-utils";
 import { RecoilRoot } from "recoil";
 import { useListaDeParticipantes } from "../../state/hook/useListaDeParticipantes";
 import { useResultadoDoSorteio } from "../../state/hook/useResultadoDoSorteio";
@@ -45,6 +46,7 @@ describe("A pagina de sorteio", () => {
   });
 
   test("O amigo secreto é exibido quando solicitado", () => {
+    jest.useFakeTimers();
     render(
       <RecoilRoot>
         <Sorteio />
@@ -61,5 +63,14 @@ describe("A pagina de sorteio", () => {
     const amigoSecreto = screen.getByRole("alert");
 
     expect(amigoSecreto).toBeInTheDocument();
+
+    act(()=> {
+      jest.runAllTimers()
+    })
+
+    expect(amigoSecreto).not.toBeInTheDocument();
+
+    
+  
   });
 });

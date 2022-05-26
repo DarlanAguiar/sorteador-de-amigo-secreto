@@ -21,6 +21,10 @@ function Sorteio(props: Props) {
 
     if (resultado.has(participanteDaVez)) {
       setAmigoSecreto(resultado.get(participanteDaVez)!);
+
+      setTimeout(() => {
+        setAmigoSecreto("");
+      }, 10000);
     }
   };
 
@@ -37,7 +41,7 @@ function Sorteio(props: Props) {
             value={participanteDaVez}
             onChange={(evento) => setParticipanteDaVez(evento.target.value)}
           >
-             <option>Selecione seu nome</option>
+            <option>Selecione seu nome</option>
             {participantes.map((participante) => (
               <option key={participante}>{participante}</option>
             ))}
